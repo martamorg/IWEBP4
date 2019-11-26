@@ -1,4 +1,4 @@
-//
+///Users/g946/Desktop/P4 Quiz10/P4 Quiz10/Base.lproj/Main.storyboard
 //  QuizzViewController.swift
 //  P4 Quiz10
 //
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class QuizzViewController: UIViewController {
+class QuizzViewController: UIViewController,
+    UITextFieldDelegate{
     
     var quiz: QuizzItem!
     
@@ -20,14 +21,23 @@ class QuizzViewController: UIViewController {
     
     @IBOutlet weak var photoImageView: UIImageView!
     
-    //faltan por añadir oulets del nombre del autor y noseq mas 
+    @IBOutlet weak var authorLabel: UILabel!
     
+    @IBOutlet weak var responseTextField: UITextField!
+    
+    
+    
+    var quizz10Model = Quizz10Model()
+
+    //añadir text field para respuestas
+    //hacer resizesing 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         questionLabel.text = quiz.question
-        answerLabel.text = quiz.answer
+        //answerLabel.text = quiz.answer
+        authorLabel.text = quiz.author?.username
         
         attachementImageView.image = UIImage(named: "none")!
         if let url = quiz.attachment?.url {
@@ -40,8 +50,40 @@ class QuizzViewController: UIViewController {
         }
 
     }
-    
 
+    
+    
+    @IBAction func responseEnter(_ sender: UITextField) {
+        
+        let respuesta = sender.text?.lowercased()
+        if respuesta == quiz.answer.lowercased() {
+            alert(msg: "CORRECTO")
+        } else{
+            alert(msg: "INCORRECTO")
+        }
+        
+    }
+    
+    
+    
+    
+    @IBAction func checkButton() {
+        
+        
+        let respuesta = responseTextField.text?.lowercased()
+        
+        if respuesta == quiz.answer.lowercased() {
+            alert(msg: "CORRECTO")
+        } else{
+            alert(msg: "INCORRECTO")
+        }
+        
+    }
+    
+    
+    
+    
+    
     /*
     // MARK: - Navigation
 

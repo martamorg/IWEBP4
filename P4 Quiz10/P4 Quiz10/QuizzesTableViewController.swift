@@ -45,26 +45,34 @@ class QuizzesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Quizz Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Quizz Cell", for: indexPath) as! QuizzCell
 
         // Configure the cell...
         
         let row = indexPath.row
         let quizz = quizz10Model.quizzes[row]
         
-        cell.textLabel?.text = quizz.question
-        cell.detailTextLabel?.text = quizz.author?.username ?? "anonimo"
-        cell.imageView?.image = UIImage(named: "none") //cambiar luego la imagen
+        cell.questionLabel.text = quizz.question
+        cell.imgView.image = UIImage(named: "none") //cambiar luego la imagen
         
+    
         if let url = quizz.attachment?.url {
             let img = image(url: url)
-                cell.imageView?.image = img
+                cell.imgView.image = img
             }
         
         
 
         return cell
     }
+    
+    @IBAction func refreshQuestions(_ sender: Any) {
+        
+        quizz10Model.Download()
+        self.tableView.reloadData()
+    }
+    
+    
     
 
     /*

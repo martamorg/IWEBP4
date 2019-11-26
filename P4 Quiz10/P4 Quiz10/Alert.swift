@@ -13,9 +13,11 @@ import UIKit
 extension UIViewController {
     
     func alert(msg: String, completionHandler: (() -> ())? = nil) {
+        
         print("Alerta: \(msg)")
         
-        let avc = UIAlertController(title: "Resultado", message: msg, preferredStyle: .alert)
+        let avc = UIAlertController(title: "Resultado",
+                                    message: msg, preferredStyle: .alert)
         
         avc.addAction(UIAlertAction(title: "OK", style: .default) { (action) in completionHandler?()
             
